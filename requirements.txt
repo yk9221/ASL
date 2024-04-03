@@ -25,8 +25,6 @@ fsspec==2024.2.0
 gitdb==4.0.11
 GitPython==3.1.42
 idna==3.4
-ipykernel==6.29.3
-ipython==8.22.1
 itsdangerous==2.1.2
 jedi==0.19.1
 Jinja2==3.1.2
