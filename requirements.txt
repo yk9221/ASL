@@ -95,9 +95,6 @@ threadpoolctl==3.3.0
 tkmacosx==1.0.5
 toml==0.10.2
 toolz==0.12.1
-torch==2.2.2
-torchtext==0.17.2
-torchvision==0.17.1
 tornado==6.4
 tqdm==4.66.2
 traitlets==5.14.1
