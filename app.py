@@ -6,11 +6,11 @@ import cv2
 from PIL import Image
 import streamlit as st
 
-from model import RESNET50
+from model import RESNET18
 from model import resize_and_pad_image
 from model import transform_image
 
-model_name = "full_resnet50.pth"
+model_name = "full_resnet18.pth"
 letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'call', 'del', 'space', 'thumbsup']
 dataset = []
 image = None

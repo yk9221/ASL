@@ -1,5 +1,3 @@
-import os
-import random
 import numpy as np
 
 import cv2
@@ -11,16 +9,17 @@ from torch.utils.data import Dataset
 
 from torchvision import transforms
 import torchvision.models as models
+from torchvision.models import ResNet18_Weights
 from torchvision.models import ResNet50_Weights
 
 out_features1 = 1000
 out_features2 = 512
 out_features3 = 128
-resnet50 = models.resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
+resnet50 = models.resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
 
-class RESNET50(nn.Module):
+class RESNET18(nn.Module):
     def __init__(self):
-        super(RESNET50, self).__init__()
+        super(RESNET18, self).__init__()
         self.resnet = nn.Sequential(*list(resnet50.children())[:-1])
 
         for param in self.resnet.parameters():
