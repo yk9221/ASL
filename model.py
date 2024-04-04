@@ -5,6 +5,7 @@ from PIL import Image
 
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import Dataset
 
 from torchvision import transforms
@@ -12,31 +13,38 @@ import torchvision.models as models
 from torchvision.models import ResNet18_Weights
 from torchvision.models import ResNet50_Weights
 
-out_features1 = 1000
-out_features2 = 512
-out_features3 = 128
-resnet50 = models.resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
+out_features1 = 256
+out_features2 = 128
 
 class RESNET18(nn.Module):
     def __init__(self):
         super(RESNET18, self).__init__()
-        self.resnet = nn.Sequential(*list(resnet50.children())[:-1])
+        # remove fully connected layer at the end
+        self.resnet = nn.Sequential(*list(resnet18.children())[:-1])
 
+        # freeze parameters
         for param in self.resnet.parameters():
             param.requires_grad = False
         
-        self.fc1 = nn.Linear(resnet50.fc.in_features, out_features1)
+        self.fc1 = nn.Linear(resnet18.fc.in_features, out_features1)
         self.fc2 = nn.Linear(out_features1, out_features2)
-        self.fc3 = nn.Linear(out_features2, out_features3)
-        self.fc4 = nn.Linear(out_features3, 30)
+        self.fc3 = nn.Linear(out_features2, 30)
+
+        self.batchnorm1 = nn.BatchNorm1d(out_features1)
+        self.batchnorm2 = nn.BatchNorm1d(out_features2)
+
+        self.dropout = nn.Dropout(0.5)
+
     def forward(self, x):
         x = self.resnet(x)
-        x = x.view(x.size(0), -1)
+        x = x.view(x.size(0), -1)  # Flatten the output
         
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-        x = torch.relu(self.fc3(x))
-        x = self.fc4(x)
+        # Forward pass through your fully connected layers
+        x = F.relu(self.batchnorm1(self.fc1(x)))
+        x = self.dropout(x)
+        x = F.relu(self.batchnorm2(self.fc2(x)))
+        x = self.dropout(x)
+        x = self.fc3(x)
 
         return x
     
