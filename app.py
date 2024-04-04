@@ -41,6 +41,8 @@ if image:
     else:
         for img in image:
             img = Image.open(img)
+            if img.mode != 'RGB':
+                img = img.convert('RGB')
             img = transform(img)
             dataset.append(img)
 
