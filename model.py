@@ -15,7 +15,7 @@ from torchvision.models import ResNet50_Weights
 
 out_features1 = 256
 out_features2 = 128
-
+resnet18 = models.resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
 class RESNET18(nn.Module):
     def __init__(self):
         super(RESNET18, self).__init__()
