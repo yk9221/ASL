@@ -8,6 +8,7 @@ from PIL import Image
 import streamlit as st
 
 from model import RESNET18
+from model import RESNET18_2
 from model import transform_image
 
 model_name = "full_resnet18.pth"
@@ -33,11 +34,15 @@ elif upload_on:
 if image:
     if camera_on:
         image = Image.open(image)
-        image_np = np.array(image)
-        image_np = np.fliplr(image_np)
-        image = Image.fromarray(image_np)
+        # image_np = np.array(image)
+        # image_np = np.fliplr(image_np)
+        # image = Image.fromarray(image_np)
         image = transform(image)
         dataset.append(image)
+        from torchvision import transforms
+        to_pil = transforms.ToPILImage()
+        pil_image = to_pil(image)
+        st.image(pil_image)
     else:
         for img in image:
             img = Image.open(img)
