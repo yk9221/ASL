@@ -59,6 +59,8 @@ if image:
         probabilities = F.softmax(predictions, dim=1)
         k = 3
         prob, pred = torch.topk(probabilities, k=k, dim=1)
-        st.write("Our model predicts:")
-        for i in range(k):
-            st.write("{} with {:.1f}%.".format(letters[pred[0][i].item()], prob[0][i].item()*100))
+        st.write("Top 3 Predictions (% probability): {} - {:.1f}%, {} - {:.1f}%, {} - {:.1f}%.".format(
+            letters[pred[0][0].item()], prob[0][0].item()*100,
+            letters[pred[0][1].item()], prob[0][1].item()*100,
+            letters[pred[0][2].item()], prob[0][2].item()*100
+        ))
