@@ -7,10 +7,9 @@ import streamlit as st
 
 from model import RESNET18
 from model import transform_image
-from model import transform_image_normalize
 
 
-model_name = "dropout_full_resnet18_2.pth"
+model_name = "resnet18_model.pth"
 letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'call', 'del', 'space', 'thumbsup']
 image = None
 
@@ -93,5 +92,4 @@ page_options = {
 
 selected_page = st.sidebar.radio("Navigation", list(page_options.keys()))
 
-# Run the selected page function
 page_options[selected_page]()
