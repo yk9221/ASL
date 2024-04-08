@@ -38,7 +38,6 @@ class RESNET18(nn.Module):
         x = self.fc2(x)
 
         return x
-    
 
 def resize_and_pad_image(image, output_size=(256, 256)):
     h, w, _ = image.shape
