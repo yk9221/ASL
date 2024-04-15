@@ -2,6 +2,8 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
+import io
+import cv2
 from PIL import Image
 import streamlit as st
 
@@ -83,10 +85,54 @@ def upload():
         classify(dataset)
         dataset = []
 
+def video():
+    st.title("Video")
+
+    col = st.columns(2)
+
+    start_video = col[0].button("Start Video")
+    stop_video = col[1].button("Stop Video")
+
+    if start_video:
+        cap_video = cv2.VideoCapture(0)
+        image_holder = st.empty()
+        label_holder = st.empty()
+
+        while cap_video.isOpened() and stop_video == False:
+            ret, frame = cap_video.read()
+            if not ret:
+                st.write("No Frame")
+                return
+            image = cv2.imencode('.jpg', frame)[1].tobytes()
+
+            if image:
+                dataset = []
+
+                width = 800
+                height = int(width * frame.shape[0] / frame.shape[1])
+
+                image_holder.image(cv2.flip(cv2.resize(frame, (width, height)), 1), channels="BGR")
+
+                image = Image.open(io.BytesIO(image))
+                transform = transform_image()
+                image = transform(image)
+                dataset.append(image)
+                dataloader = DataLoader(dataset)
+
+                for data in dataloader:
+                    predictions = model(data)
+                    probabilities = F.softmax(predictions, dim=1)
+                    _, pred = torch.max(probabilities, dim=1)
+                    label_holder.write(f"# {letters[pred.item()]}")
+
+
+        cap_video.release()
+
 page_options = {
     "Home": home,
     "Use Camera": camera,
     "Upload Image": upload,
+    "Use Video (beta)": video,
     "Instructions": instructions
 }
 
