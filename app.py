@@ -45,6 +45,8 @@ def instructions():
     st.header("ASL Alphabet List")
     st.write("If you are not familiar with the ASL alphabet, here is a list of potential hand gestures.")
     st.image("asl_chart.jpg", caption="ASL Alphabet List", use_column_width=True)
+    st.header("Use Video")
+    st.write("Press Start Video and it will predict the hand gesture.")
     st.header("Use Camera")
     st.write("Press Take Photo and it will predict the hand gesture.")
     st.header("Upload Image")
@@ -130,9 +132,9 @@ def video():
 
 page_options = {
     "Home": home,
+    "Use Video": video,
     "Use Camera": camera,
     "Upload Image": upload,
-    "Use Video": video,
     "Instructions": instructions
 }
 
