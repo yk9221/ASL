@@ -1,9 +1,14 @@
 # American Sign Language (ASL) Detector
+This model can recognize and translate ASL gestures. It was developed using Convolutional Neural Networks (CNNs) and achieved a test accuracy of 99.55%. The following image is an example of the model being used in real time to translate the ASL gesture.
+![ASL Gesture Y](Y.png)
+![ASL Gesture K](K.png)
 
-The model that is used to predict the hand gesture was trained on 60K images having an accuracy of 99.96% and was then validated on 6K images which had an accuracy of 99.47%. It was then tested on 6K more images which had an accuracy of 99.55%.
+# Classes
+This model can classify a total of 30 unique classes, including letters from A to Z, as well as special inputs like space, delete, okay, and thumbs up.
+![ASL Chart](asl_chart.jpg)
 
 # Data Collection
-Data was collected from four different sources.
+The data was collected from four different sources.
 | Dataset | Total Images | Classes |
 |----------|----------|----------|
 | [American Sign Language 1](https://www.kaggle.com/datasets/kapillondhe/american-sign-language) | 166K | A to Z, Space |
@@ -20,13 +25,13 @@ Then 2000 images were selected randomly for each of the 30 classes and took a gr
 | Okay | 0 | 0 | 0 | 2000 |
 | Thumbs Up | 0 | 0 | 0 | 2000 |
 
-Data was then split into Train (80%), Validation (10%) and Test (10%).
+Afterwards, the data was split into Training (80%), Validation (10%) and Test (10%).
 
 # Data Augmentation
 Images were augmented with a 15% probability using the following transformations:
 - 15 degree rotations
 - Scaling between 0.85 and 1.15
-- Gaussian blurring of σ=0.1 to 2.0
+- Gaussian blurring of σ=0.1 to σ=2.0
 - Horizontal flipping
 
 # Model Architecture
@@ -38,7 +43,6 @@ The model that was used was a variation of the ResNet 18 which includes:
 - Average pooling
 ![Model Architecture](ResNet18_Model.png)
 
-
 # Quantitative Results
 Trained on 60,000 unique images and achieved an accuracy of 99.96% and a loss of 0.0010  
 Validated on 6,000 unseen images and achieved an accuracy of 99.47% and a loss of 0.0017
@@ -46,11 +50,9 @@ Validated on 6,000 unseen images and achieved an accuracy of 99.47% and a loss o
 # Qualitative Results
 Tested on 6,000 unseen images and achieved an accuracy of 99.55%
 
-
 # Installations
 To install the necessary packages, please execute the following command:
 - `pip install -r requirements.txt`
 
 Once the installation is complete, you can start the website by running:
 - `streamlit run app.py`
-
