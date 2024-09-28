@@ -1,7 +1,9 @@
 # American Sign Language (ASL) Detector
 This model can recognize and translate ASL gestures. It was developed using Convolutional Neural Networks (CNNs) and achieved a test accuracy of 99.55%. The following image is an example of the model being used in real time to translate the ASL gesture.
-![ASL Gesture Y](Y.png)
-![ASL Gesture K](K.png)
+<div style="display: flex; justify-content: space-around;">
+  <img src="Y.png" alt="ASL Gesture Y" style="width: 200px; height: auto;"/>
+  <img src="K.png" alt="ASL Gesture K" style="width: 200px; height: auto;"/>
+</div>
 
 # Classes
 This model can classify a total of 30 unique classes, including letters from A to Z, as well as special inputs like space, delete, okay, and thumbs up.
