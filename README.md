@@ -40,7 +40,7 @@ The model that was used was a variation of the ResNet 18 which includes:
 
 
 # Quantitative Results
-Trained on 60,000 unique images and achieved an accuracy of 99.96% and a loss of 0.0010
+Trained on 60,000 unique images and achieved an accuracy of 99.96% and a loss of 0.0010  
 Validated on 6,000 unseen images and achieved an accuracy of 99.47% and a loss of 0.0017
 
 # Qualitative Results
